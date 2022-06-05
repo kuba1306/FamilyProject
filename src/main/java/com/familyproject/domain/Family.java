@@ -17,8 +17,8 @@ public class Family {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="family_id", unique=true, nullable = false)
-    private int id;
+    @Column(name="FAMILY_ID", nullable = false)
+    private int familyId;
     private String familyName;
     private int nrOfAdults;
     private int nrOfChildren;
@@ -31,5 +31,4 @@ public class Family {
             fetch = FetchType.LAZY
     )
     private List<FamilyMember> members = new ArrayList<>();
-
 }
