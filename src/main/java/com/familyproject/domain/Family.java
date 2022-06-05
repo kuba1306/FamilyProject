@@ -1,6 +1,7 @@
 package com.familyproject.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,13 +11,14 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Table(name = "families")
 public class Family {
 
     @Id
-    @NotNull
-    @GeneratedValue
-    private int familyId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="family_id", unique=true, nullable = false)
+    private int id;
     private String familyName;
     private int nrOfAdults;
     private int nrOfChildren;

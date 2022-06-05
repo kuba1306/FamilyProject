@@ -1,23 +1,24 @@
 package com.familyproject.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 @Entity
 @Table(name = "family_members")
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class FamilyMember {
 
     @Id
     @GeneratedValue
-    @NotNull
+    @Column(name = "MEMBER_ID", unique = true, nullable = false)
     private int memberId;
+    @Column(name = "GIVEN_NAME")
     private String givenName;
+    @Column(name = "FAMILY_NAME")
     private String familyName;
+    @Column(name = "AGE")
     private int age;
     @ManyToOne
     @JoinColumn(name = "FAMILY_ID")

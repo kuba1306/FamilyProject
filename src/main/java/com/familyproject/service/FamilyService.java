@@ -6,39 +6,28 @@ import com.familyproject.repository.FamilyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import java.util.Optional;
 
 @Service
 public class FamilyService {
-
 
     @Autowired
     FamilyRepository familyRepository;
     @Autowired
     FamilyMemberRepository familyMemberRepository;
-
     @Autowired
     JdbcTemplate jdbcTemplate;
+    private int id;
+
+    public FamilyService(FamilyRepository familyRepository) {
+        this.familyRepository = familyRepository;
+    }
+
+    public Family getById(int id) {
+        return jdbcTemplate.queryForObject("SELECT family_id, family_name, nr_of_adults, nr_of_children, nr_of_infants " +
+                "FROM families WHERE family_id = ?", BeanPropertyRowMapper.newInstance(Family.class), id);
+    }
 }
-
-
-//    @Autowired
-//    FamilyRepository familyRepository;
-//    @Autowired
-//    FamilyMemberRepository familyMemberRepository;
-//    @Autowired
-//    JdbcTemplate jdbcTemplate;
-//
-//    public Family getById(int id) {
-//        return jdbcTemplate.queryForObject("SELECT id, familyName, nrOfAdults, nrOfChildren, nrOfInfants FROM family WHERE " +
-//                "id = ?", BeanPropertyRowMapper.newInstance(Family.class), id);
-//    }
-//
-//    public int create(List<Family> families) {
-//        families.forEach(family -> jdbcTemplate
-//                .update("INSERT INTO family(id, familyName, nrOfAdults, nrOfChildren, nrOfInfants)",
-//                        family.getFamilyId(), family.getFamilyName(), family.getNrOfAdults(), family.getNrOfChildren(), family.getNrOfInfants()));
-//        return 1;
-//    }
-//}

@@ -22,12 +22,13 @@ public class FamilyMemberService {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-    }
 
-//    public List<FamilyMember> getAll() {
-//
-//        return jdbcTemplate.query("SELECT id, familyName, givenName, familyId FROM familyMember",
-//                BeanPropertyRowMapper.newInstance(FamilyMember.class));
-//    }
+
+    public List<FamilyMember> getAll() {
+
+        return jdbcTemplate.query("SELECT id, familyName, givenName, familyId FROM familyMember",
+                BeanPropertyRowMapper.newInstance(FamilyMember.class));
+    }
+}
 
 
