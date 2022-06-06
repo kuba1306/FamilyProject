@@ -12,4 +12,6 @@ import java.util.List;
 @Repository
 public interface FamilyMemberRepository extends CrudRepository<FamilyMember, Integer> {
 
+    List<FamilyMember> findAll();
+
 }

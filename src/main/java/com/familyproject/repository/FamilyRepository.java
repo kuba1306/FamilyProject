@@ -14,17 +14,4 @@ import java.util.Optional;
 @Transactional
 @Repository
 public interface FamilyRepository extends CrudRepository<Family, Integer> {
-
-
-//    @Override
-//    Family save(Family family);
-
-
-    @Override
-    long count();
-
-
-
-
-
 }

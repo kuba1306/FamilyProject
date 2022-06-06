@@ -1,6 +1,9 @@
 package com.familyproject.service;
 
+import com.familyproject.domain.Family;
 import com.familyproject.domain.FamilyMember;
+import com.familyproject.exception.FamilyMemberNotFoundException;
+import com.familyproject.exception.FamilyNotFoundException;
 import com.familyproject.repository.FamilyMemberRepository;
 import com.familyproject.repository.FamilyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +38,15 @@ public class FamilyMemberService {
         familyMemberRepository.save(familyMember);
     }
 
-    public List<FamilyMember> getAll() {
+    public void deleteFamilyMember(final Integer id) throws FamilyMemberNotFoundException {
+        FamilyMember familyMember = familyMemberRepository.findById(id).orElseThrow(()->new FamilyMemberNotFoundException(
+                "Family member with id nr " + id + " doesn't exist"
+        ));
+        familyMemberRepository.delete(familyMember);
+    }
 
-        return jdbcTemplate.query("SELECT id, familyName, givenName, familyId FROM familyMember",
-                BeanPropertyRowMapper.newInstance(FamilyMember.class));
+    public List<FamilyMember> getAll() {
+        return familyMemberRepository.findAll();
     }
 }
 

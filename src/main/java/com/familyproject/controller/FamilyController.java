@@ -21,14 +21,14 @@ public class FamilyController {
     FamilyMemberService familyMemberService;
 
     @GetMapping("/{id}")
-    public Family getById(@PathVariable("id") int id) {
+    public Family getById(@PathVariable("id") int id) throws FamilyNotFoundException {
         return familyService.getById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createFamily(@RequestBody Family family) {
+    public int createFamily(@RequestBody Family family) {
         familyService.createFamily(family);
-        return ResponseEntity.ok().build();
+        return family.getId();
     }
 
     @DeleteMapping(value = "{id}")
