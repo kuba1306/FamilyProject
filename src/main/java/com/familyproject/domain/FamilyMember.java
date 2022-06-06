@@ -13,7 +13,7 @@ public class FamilyMember {
     @Id
     @GeneratedValue
     @Column(name = "MEMBER_ID", unique = true, nullable = false)
-    private int memberId;
+    private int id;
     @Column(name = "GIVEN_NAME")
     private String givenName;
     @Column(name = "FAMILY_NAME")

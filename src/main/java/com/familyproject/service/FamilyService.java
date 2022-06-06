@@ -24,15 +24,16 @@ public class FamilyService {
         this.familyRepository = familyRepository;
     }
 
+    public void createFamily(Family family) {
+        familyRepository.save(family);
+    }
+
     public Family getById(int id) {
         return jdbcTemplate.queryForObject("SELECT family_id, family_name, nr_of_adults, nr_of_children, nr_of_infants " +
                 "FROM families WHERE family_id = ?", BeanPropertyRowMapper.newInstance(Family.class), id);
     }
 
-    public void createFamily(Family family) {
-        familyRepository.save(family);
 
-    }
     public void deleteFamily(final Integer id) throws FamilyNotFoundException {
         Family family = familyRepository.findById(id).orElseThrow(FamilyNotFoundException::new);
         familyRepository.delete(family);

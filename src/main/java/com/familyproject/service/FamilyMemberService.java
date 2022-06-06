@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
-
 
 @Service
 public class FamilyMemberService {
@@ -23,6 +22,18 @@ public class FamilyMemberService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    public FamilyMemberService(FamilyMemberRepository familyMemberRepository) {
+        this.familyMemberRepository = familyMemberRepository;
+    }
+
+    public FamilyMember getById(int id) {
+        return jdbcTemplate.queryForObject("SELECT member_id, age, family_name, given_name, family_id " +
+                "FROM family_members  WHERE member_id = ?", BeanPropertyRowMapper.newInstance(FamilyMember.class), id);
+    }
+
+    public void createFamilyMember(FamilyMember familyMember) {
+        familyMemberRepository.save(familyMember);
+    }
 
     public List<FamilyMember> getAll() {
 
