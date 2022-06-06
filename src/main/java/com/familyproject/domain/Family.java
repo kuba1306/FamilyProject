@@ -18,7 +18,8 @@ public class Family {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="FAMILY_ID", nullable = false)
-    private int familyId;
+    private int id;
+    @Column(name = "family_name")
     private String familyName;
     private int nrOfAdults;
     private int nrOfChildren;

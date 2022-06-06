@@ -15,10 +15,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/family")
 public class FamilyController {
-
     @Autowired
     FamilyService familyService;
-
     @Autowired
     FamilyMemberService familyMemberService;
 
@@ -29,7 +27,7 @@ public class FamilyController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createFamily(@RequestBody Family family) {
-        familyService.save(family);
+        familyService.createFamily(family);
         return ResponseEntity.ok().build();
     }
 
